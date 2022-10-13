@@ -1,0 +1,54 @@
+<!doctype HTML>
+<html>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <script src="script/aframe.min.js"></script>
+    <script src="script/aframe-ar.js"></script>
+    <script src="script/aframe-particle-system-component.js"></script><!-- Particle handler -->
+
+    <body style="margin: 0px; overflow: hidden;">
+        <a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+            <!-- Pizza asset - custom made gltf model -->
+            <a-assets>
+                <a-asset-item id="pizza" src="models/pizzabaseBig.gltf"></a-asset-item>
+            </a-assets>
+            
+            <!-- Hiro pattern - shows the pizza model -->
+            <a-marker type="pattern" url="data/hiro.patt">
+                <a-entity scale="0.10 0.10 0.10" gltf-model="#pizza"></a-entity>
+            </a-marker>
+
+            <!-- Letter A pattern - shows the pizza model spinning in a full 360 loop repeated -->
+            <a-marker type="pattern" url="data/letterB.patt">
+                <a-entity 
+                    scale="0.10 0.10 0.10" 
+                    gltf-model="#pizza"
+                    animation__rotate = "property: rotation; dur: 2000; easing: linear; dir: normal; from:0 0 0; to: 0 360 0; loop: true;">
+                </a-entity>
+            </a-marker>
+
+            <!-- Kanji pattern - Using the particle systems -->
+            <!-- Pizza particle used for the particle system -->
+            <a href="https://www.flaticon.com/free-icons/pizza" title="pizza icons">Pizza icons created by Freepik - Flaticon</a>
+            <a-marker type="pattern" url="data/kanji.patt">
+                <a-entity 
+                    position="0 0 0" 
+                    particle-system="
+                        texture: images/pizza1.png;
+                        size: 5, 0;
+                        color: #F9C727, #F99C27; 
+                        velocityValue: 0.001 0.001 0.001;
+                        velocitySpread: 0.5 0 0.5; 
+                        accelerationValue: 0.001 0.001 0.001;
+                        accelerationSpread: 0.001 0.001 0.001;
+                        rotationAngle: 0; 
+                        blending: 1;
+                        particleCount: 200;
+                        maxAge: 50; ">
+                </a-entity>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
